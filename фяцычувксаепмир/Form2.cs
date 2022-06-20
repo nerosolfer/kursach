@@ -14,7 +14,7 @@ using static фяцычувксаепмир.DB;
 namespace фяцычувксаепмир
 {
     public partial class Form2 : Form
-    {
+    { 
         public Form2()
         {
             InitializeComponent();
