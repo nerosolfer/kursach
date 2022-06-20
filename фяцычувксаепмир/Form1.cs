@@ -77,7 +77,7 @@ namespace фяцычувксаепмир
 
             _ConnectDB ConnDb = new _ConnectDB();
             MySqlConnection connDb = new MySqlConnection(ConnDb.Initialization());
-            string zapros = "SELECT id, kod_pacient, kod_vrach, nazv_bol, MKB, smert FROM Diagnoz";
+            string zapros = "SELECT id, id_pac, id_sotr, nazv_bol, MKB, smert FROM Diagnoz";
             try
             {
                 connDb.Open();
@@ -111,5 +111,13 @@ namespace фяцычувксаепмир
                 MessageBox.Show(id);
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Form2 _form2 = new Form2();
+            _form2.ShowDialog();
+        }
+
+      
     }
 }
