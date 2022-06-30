@@ -14,7 +14,21 @@ using static фяцычувксаепмир.DB;
 namespace фяцычувксаепмир
 {
     public partial class Form2 : Form
-    { 
+    {
+        string connStr = "server=chuc.caseum.ru;port=33333;user=st_1_19_21;database=is_1_19_st21_KURS;password=47173474;";
+        static string sha256(string randomString)
+        {
+            var crypt = new System.Security.Cryptography.SHA256Managed();
+            var hash = new System.Text.StringBuilder();
+            byte[] crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(randomString));
+            foreach (byte theByte in crypto)
+            {
+                hash.Append(theByte.ToString("x2"));
+            }
+            return hash.ToString();
+        }
+
+        
         public Form2()
         {
             InitializeComponent();
@@ -33,7 +47,7 @@ namespace фяцычувксаепмир
         private void button1_Click(object sender, EventArgs e)
         {
 
-            string connStr = "server=chuc.caseum.ru;port=33333;user=st_1_19_21;database=is_1_19_st21_KURS;password=47173474;";
+            
             string sql = "SELECT * FROM `PW` WHERE `login` = @un and  `passw`= @up";
 
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -47,7 +61,7 @@ namespace фяцычувксаепмир
             command.Parameters.Add("@up", MySqlDbType.VarChar, 25);
 
             command.Parameters["@un"].Value = textBox1.Text;
-            command.Parameters["@up"].Value = textBox2.Text;
+            command.Parameters["@up"].Value = sha256(textBox2.Text);
 
             adapter.SelectCommand = command;
             adapter.Fill(table);
