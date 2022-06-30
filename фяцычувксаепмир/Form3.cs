@@ -30,46 +30,36 @@ namespace фяцычувксаепмир
             string connStr = "server=chuc.caseum.ru;port=33333;user=st_1_19_21;database=is_1_19_st21_KURS;password=47173474;";
             MySqlConnection conn = new MySqlConnection(connStr);
 
-            /* string sql = $"INSERT INTO Pacient ( FIO, pol, snils, polis, data_rozhd, adres, zanyatost, tsel, rezult, diagnoz, data_smert, id_sotr) " +
-                $"VALUES ( {textBox1.Text} , {comboBox1.SelectedItem}, {textBox2.Text}, {textBox3.Text}, {dateTimePicker1.Value},  {textBox8.Text}, {comboBox2.SelectedItem}, {comboBox3.SelectedItem},  {textBox4.Text},  {textBox5.Text}, {dateTimePicker2.Value}, {textBox6.Text});";
-             try
-             {
-                 conn.Open();
-                 MySqlCommand cmd = new MySqlCommand(sql, conn);
-                 cmd.ExecuteNonQuery();
-                 MessageBox.Show("Запись добавлена!");
-             }
-              catch (Exception ex)
-              {
-                  MessageBox.Show(ex.Message);
-              }
-             finally
-             {
-                 conn.Close();
-             }*/
+            string fio = textBox1.Text;
+            string pol1 = comboBox1.Text;
+            string snils1 = textBox2.Text;
+            string polis1 = textBox3.Text;
+            string data_rozhd1 = dateTimePicker1.Value.ToString("yyyy-MM-dd hh:mm:ss");
+            string adres1 = textBox8.Text;
+            string zanyatost1 = comboBox2.Text;
+            string tsel1 = comboBox3.Text;
+            string rezult1 = textBox4.Text;
+            string diagnoz1 = textBox5.Text;
+            string data_smert1 = dateTimePicker2.Value.ToString("yyyy-MM-dd hh:mm:ss");
+            int id_sotr1 = Convert.ToInt32(textBox6.Text);
+
+
+            string sql = $"INSERT INTO Pacient ( FIO, pol, snils, polis, data_rozhd, adres, zanyatost, tsel, rezult, diagnoz, data_smert, id_sotr) " +
+            $"VALUES ('{fio}' ,'{pol1}' ,'{snils1}' ,'{polis1}' ,'{data_rozhd1}' ,'{adres1}' ,'{zanyatost1}' ,'{tsel1}' ,'{rezult1}' ,'{diagnoz1}' ,'{data_smert1}' ,'{id_sotr1}');";
             try
             {
-                MySqlCommand command = new MySqlCommand("INSERT INTO Pacient VALUES(@FIO, @pol, @snils, @polis, @data_rozhd, @adres, @zanyatost, @tsel, @rezult, @diagnoz, @data_smert, @id_sotr)", conn);
-                command.Parameters.AddWithValue("@FIO", textBox1.Text);
-                command.Parameters.AddWithValue("@pol", comboBox1.SelectedItem);
-                command.Parameters.AddWithValue("@snils", textBox2.Text);
-                command.Parameters.AddWithValue("@polis", textBox3.Text);
-                command.Parameters.AddWithValue("@data_rozhd", dateTimePicker1.Value);
-                command.Parameters.AddWithValue("@adres", textBox8.Text);
-                command.Parameters.AddWithValue("@zanyatost", comboBox2.SelectedItem);
-                command.Parameters.AddWithValue("@tsel", comboBox3.SelectedItem);
-                command.Parameters.AddWithValue("@rezult", textBox4.Text);
-                command.Parameters.AddWithValue("@diagnoz", textBox5.Text);
-                command.Parameters.AddWithValue("@data_smert", dateTimePicker2.Value);
-                command.Parameters.AddWithValue("@id_sotr", textBox6.Text);
-                command.Connection.Open();
-                command.ExecuteNonQuery();
-
-                MessageBox.Show("Сотрудник добавлен", "Все прошло успешно!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Запись добавлена!");
             }
-            catch (Exception E)
+            catch (Exception ex)
             {
-                MessageBox.Show(E.Message);
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
             }
         }
 

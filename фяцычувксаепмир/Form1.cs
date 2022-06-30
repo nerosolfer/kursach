@@ -74,7 +74,6 @@ namespace фяцычувксаепмир
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
             _ConnectDB ConnDb = new _ConnectDB();
             MySqlConnection connDb = new MySqlConnection(ConnDb.Initialization());
             string zapros = "SELECT id, id_pac, id_sotr, nazv_bol, MKB, smert FROM Diagnoz";
@@ -92,7 +91,24 @@ namespace фяцычувксаепмир
                 MessageBox.Show(message);
                 this.Close();
             }
+            TimeInApp();
 
+                async void TimeInApp()
+            
+             {
+                var dt = new DateTime();
+                while (true)
+                {
+                    dt = dt.AddSeconds(1);
+                    if (dt.Minute == 0)
+                        label1.Text = dt.ToString("ss");
+                    if (dt.Hour == 0)
+                        label1.Text = dt.ToString("mm:ss");
+                    else
+                        label1.Text = dt.ToString("HH:mm:ss");
+                    await Task.Delay(1000);
+                }
+            }
 
         }
 
@@ -328,7 +344,7 @@ namespace фяцычувксаепмир
             MySqlConnection connDb = new MySqlConnection(ConnDb.Initialization());
             connDb.Open();
             
-            string query = "DELETE FROM `is_1_19_st21_KURS`.`Pacient` WHERE  `id_pac`= pac_id.id_selected_rowsA ";
+            string query = "DELETE FROM `is_1_19_st21_KURS` `Pacient` WHERE id = pac_id.id_selected_rowsA ";
             try
             {
                 MySqlCommand cmd = new MySqlCommand(query, connDb);
@@ -344,6 +360,11 @@ namespace фяцычувксаепмир
                 connDb.Close();
                 
             }
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
